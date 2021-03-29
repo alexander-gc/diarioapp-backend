@@ -9,9 +9,8 @@ const { check } = require('express-validator')
 const { validarCampos } = require('../middlewares/validarCampos');
 const { mostrarRegistro, agregarRegistro, editarRegistro, eliminarRegistro } = require('../controllers/registers')
 
-const { isDate } = require('../helpers/isDate')
-const { isTime } = require('../helpers/isTime')
-
+//const { isDate } = require('../helpers/isDate')
+//const { isTime } = require('../helpers/isTime')
 
 const router = Router();
 
