@@ -19,7 +19,10 @@ const mostrarRegistro = async (req, res=response) => {
 const agregarRegistro = async (req, res=response) => {
 
     /* TIMESTAMP Y FECHA: LISTO FORMATO */
-    const timestamp =  moment().format("HH:mm:ss a");
+    const timestamp =  moment().subtract(6, 'hours').format("DD-MM-YYYY - HH:mm:ss a");
+
+    //const timestamp =  moment().format("HH:mm:ss a")
+
     const fecha = moment().format('dddd DD MMMM YYYY');
 
     const registro = new Register({
