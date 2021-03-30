@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 require('dotenv').config();
 
@@ -12,6 +13,9 @@ app.listen(port, () => {
 
 //Conectar a la base de datos.
 dbConexion();
+
+//CORS.
+app.use(cors());
 
 //Directorio público. (Frontend)
 
