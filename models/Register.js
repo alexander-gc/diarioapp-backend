@@ -18,6 +18,9 @@ const RegisterSchema = Schema({
     },
     timestamp_actualizado: {
         type: String
+    },
+    imagen: {
+        type: String,
     }
 
 });
