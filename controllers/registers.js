@@ -11,7 +11,7 @@ const mostrarRegistro = async (req, res=response) => {
     res.status(201).json({
         ok: true,
         msg: 'Mostrando registros..',
-        registros
+        registros,
     })
 }
 

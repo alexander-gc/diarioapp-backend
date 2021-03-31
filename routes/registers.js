@@ -45,6 +45,6 @@ router.put('/:id',
     );
 
 // Eliminando un registro del diario.
-router.delete('/:id', eliminarRegistro);
+router.delete('/eliminar/:id', eliminarRegistro);
 
 module.exports = router;
