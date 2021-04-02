@@ -4,25 +4,21 @@
 */
 
 const {Router} = require('express');
-const { check } = require('express-validator') 
+const { check } = require('express-validator'); //Para validar los campos del form. Si no se ingresa un valor, se activará el check.
 
 const { validarCampos } = require('../middlewares/validarCampos');
 const { mostrarRegistro, agregarRegistro, editarRegistro, eliminarRegistro } = require('../controllers/registers')
 
-//const { isDate } = require('../helpers/isDate')
-//const { isTime } = require('../helpers/isTime')
-
 const router = Router();
 
-//Mostrar/obtener lista del diario.
+// Obtener lista del diario.
 router.get('/', mostrarRegistro);
 
-// Crear/agregar un registro del diario.
+// Crear un registro del diario.
 router.post(
     '/agregar', 
     [
-        //check('fecha', 'Ingresa la fecha de hoy').custom( isDate ),
-        //check('timestamp', 'Timestamp').custom( isTime ),        
+        check('fecha', 'Ingresa la fecha de hoy').not().isEmpty(),
         check('sentimiento', 'Ingresa cómo te sentiste hoy').not().isEmpty(),
         check('descripcion', 'Describe cómo fue tu día').not().isEmpty(),
         check('imagen', 'Ingresa una imagen de referencia').not().isEmpty(),
@@ -34,8 +30,7 @@ router.post(
 // Editando un registro del diario.
 router.put('/:id', 
     [
-        //check('fecha', 'Ingresa la fecha de hoy').custom( isDate ),
-        //check('timestamp', 'Timestamp').custom( isTime ),        
+        check('fecha', 'Ingresa la fecha de hoy').not().isEmpty(),
         check('sentimiento', 'Ingresa cómo te sentiste hoy').not().isEmpty(),
         check('descripcion', 'Describe cómo fue tu día').not().isEmpty(),
         check('imagen', 'Ingresa una imagen de referencia').not().isEmpty(),

@@ -3,7 +3,7 @@ const moment = require('moment')
 
 const Register = require('../models/Register');
 
-//Mostrar lista del diario.
+//Mostrar lista del diario. No requiere pedir data ni el id.
 const mostrarRegistro = async (req, res=response) => {
 
     const registros = await Register.find()
@@ -15,13 +15,13 @@ const mostrarRegistro = async (req, res=response) => {
     })
 }
 
-//Agregando un registro.
+//Agregando un registro. Se pedirá ingresar la data.
 const agregarRegistro = async (req, res=response) => {
 
-    /* TIMESTAMP Y FECHA: LISTO FORMATO */
+    //Timestapm generado en el momento del registro. Con formato listo por el momentJs.
+    //Se le restará 6 horas, porque el servidor heroku está en zona horaria de EU (La zona horaria de EU nos lleva 6hrs aprox).
+    //Así el valor del timestamp sea de la zona horaria de México.
     const timestamp =  moment().subtract(6, 'hours').format("DD-MM-YYYY - HH:mm:ss a");
-
-    //const fecha = moment().format('dddd DD MMMM YYYY');
 
     const registro = new Register({
         ...req.body,
@@ -48,12 +48,13 @@ const agregarRegistro = async (req, res=response) => {
 
 }
 
-//Editando un registro.
+//Editando un registro. Se pedirá id y la nueva data.
 const editarRegistro = async (req, res=response) => {
 
-    // Timestamp de la última modificación.
+    // Hay un timestamp inicial del registro, pero también agregué un timestamp adicional.
+    // El adicional es para almacenar la última modificación (Edit) que se le hizo a un registro, luego de ser creada.
 
-    const timestamp_actualizado =  moment().format("HH:mm:ss a");
+    const timestamp_actualizado =  moment().subtract(6, 'hours').format("DD-MM-YYYY - HH:mm:ss a");
 
     const registroId = req.params.id;
 
@@ -90,6 +91,7 @@ const editarRegistro = async (req, res=response) => {
     }
 }
 
+// Eliminando un registro. Solo pedirá el id.
 const eliminarRegistro = async (req, res=response) => {
 
     const registroId = req.params.id;
